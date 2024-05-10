@@ -10,12 +10,16 @@ import Home from './component/Home/Home';
 import AuthProvider from './component/AuthProvider';
 import Login from './component/Authentication/Login';
 import Registration from './component/Authentication/Registration';
-import toast, { Toaster } from "react-hot-toast";
+import Rooms from './component/Authentication/Pages/Rooms';
+import MyBookings from './component/Authentication/Pages/MyBookings';
+import Error from './component/Error';
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: '/',
@@ -28,6 +32,14 @@ const router = createBrowserRouter([
       {
         path: '/reg',
         element: <Registration></Registration>,
+      },
+      {
+        path: '/rooms',
+        element: <Rooms></Rooms>,
+      },
+      {
+        path: '/myBookings',
+        element: <MyBookings></MyBookings>,
       },
     ]
   },

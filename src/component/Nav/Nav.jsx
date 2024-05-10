@@ -41,6 +41,12 @@ const Nav = () => {
                <li>
               <Link to={'/'}>Home</Link >
             </li>
+            <li>
+              <Link to={'/rooms'}>Rooms</Link >
+            </li>
+            <li>
+              <Link to={'/myBookings'}>My Bookings</Link >
+            </li>
             </ul>
           </div>
          <Link to={'/'}> <a className=" text-5xl font-[600]">--COZI--</a></Link>
@@ -50,15 +56,16 @@ const Nav = () => {
             <li>
               <Link to={'/'}>Home</Link >
             </li>
+            <li>
+              <Link to={'/rooms'}>Rooms</Link >
+            </li>
+            <li>
+              <Link to={'/myBookings'}>My Bookings</Link >
+            </li>
            
           </ul>
         </div>
-        {/* <div className="navbar-end space-x-3">
-        <Link to={'/login'}> <button  className="btn btn-sm lg:btn md:btn lg:text-[16px] md:text-[14px]">Log In</button></Link>
-   <Link to={'/reg'}> <button className="btn btn-sm lg:btn md:btn lg:text-[16px] md:text-[14px]">Registration</button></Link>
-    <button onClick={logOutNav} className="btn btn-sm lg:btn md:btn lg:text-[16px] md:text-[14px]">Log Out</button>
-
-        </div> */}
+     
         <div className="navbar-end ">
         {person ? (
         <div >
