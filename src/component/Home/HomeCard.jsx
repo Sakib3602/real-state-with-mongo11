@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const HomeCard = () => {
     const [data, setData] = useState([]);
+    const [load,setLoad] = useState(false);
 
     useEffect(()=>{
         getData()
@@ -11,9 +12,11 @@ const HomeCard = () => {
 
     const getData = async()=>{
         try {
+            setLoad(true)
             const data1 = await axios.get('http://localhost:4000/homeCard');
             
             setData(data1.data)
+            setLoad(false)
         } catch (error) {
             console.error('Error fetching data:', error);
             throw error;
@@ -32,9 +35,14 @@ const HomeCard = () => {
             </div>
                 <h1>data length : {data.length}</h1>
 
+                {
+                        load && <h1 className="text-[100px] text-black">LOading</h1>
+                    }
+
             <div className="bg-[#293624]  lg:min-h-[1620px] p-2 md:p-[40px] lg:p-[60px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 text-white">
                 
                 {/* card start */}
+               
                 {
                     data.slice(0,6).map(e => <div key={e._id} className="h-[300px] w-[400px]">
                     <img src={e.RoomImages} alt="" />
