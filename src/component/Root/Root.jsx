@@ -1,10 +1,14 @@
+import { Outlet } from "react-router-dom";
+import Nav from "../Nav/Nav";
 
 
 const Root = () => {
     return (
-        <div>
+        <div className="crimson">
+            <Nav></Nav>
+            <Outlet></Outlet>
 
-            <h1>root</h1>
+         
             
         </div>
     );
