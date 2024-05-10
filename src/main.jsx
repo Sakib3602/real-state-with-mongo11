@@ -13,6 +13,7 @@ import Registration from './component/Authentication/Registration';
 import Rooms from './component/Authentication/Pages/Rooms';
 import MyBookings from './component/Authentication/Pages/MyBookings';
 import Error from './component/Error';
+import Details from './component/Authentication/Pages/Details';
 
 
 const router = createBrowserRouter([
@@ -40,6 +41,11 @@ const router = createBrowserRouter([
       {
         path: '/myBookings',
         element: <MyBookings></MyBookings>,
+      },
+      {
+        path: '/detail/:id',
+        element: <Details></Details>,
+        // loader : ({params})=> fetch(`http://localhost:4000/homeCard`)
       },
     ]
   },

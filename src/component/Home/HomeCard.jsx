@@ -33,7 +33,7 @@ const HomeCard = () => {
            Discover the epitome of luxury and comfort with our selection of premium rooms. Immerse yourself in sophistication and elegance as you choose from our finest accommodations, meticulously crafted to exceed your expectations. Book now for an unforgettable stay!
            </p>
             </div>
-                <h1>data length : {data.length}</h1>
+                
 
                 {
                         load && <h1 className="text-[100px] text-black">LOading</h1>

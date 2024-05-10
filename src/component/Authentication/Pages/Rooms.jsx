@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Rooms = () => {
   const [data, setData] = useState([]);
@@ -15,6 +16,7 @@ const Rooms = () => {
       const data1 = await axios.get("http://localhost:4000/homeCard");
 
       setData(data1.data);
+      console.log(data1.data)
       setLoad(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -72,28 +74,40 @@ const Rooms = () => {
 </div>
 {/*  */}
 
+{/*  */}
 
 
 
-
-      <h1 className="text-[28px] text-center lg:text-[56px] md:text-[56px] font-[700]">
+<div className="bg-[#293624] mt-10 pt-10 text-white">
+    
+<h1 className="text-[28px] text-center lg:text-[56px] md:text-[56px] font-[700]">
         OUR ALL ROOMS!
       </h1>
       <div className="w-[95%] lg:[60%] md:w-[60%] m-auto">
-        <p className="text-[18px] text-center font-[400]">
+        <p className="text-[18px] text-center font-[400] pb-8">
           Explore our diverse range of rooms designed to cater to your every
           need. From cozy and intimate spaces to luxurious suites, we offer
           comfort and style for every traveler. Discover your perfect retreat
           today!
         </p>
       </div>
+</div>
 
       {load && <h1 className="text-[100px] text-black">LOading</h1>}
-      <div className="bg-[#293624] grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-2">
+      <div className="bg-[#293624] grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 md:px-[100px] lg:px-[200px]">
         {
-            data.map(e => <div className="bg-black  h-[350px] w-full" key={e._id}>
+            data.map(e => <div className=" space-y-2 text-white  h-[590px] w-full" key={e._id}>
 
-                <img src={e.RoomsImages} alt="" />
+<img className="w-full h-[450px] transition-transform duration-300 ease-in hover:scale-105 object-cover" src={e.RoomImages} alt="" />
+
+                <h1>{e.RoomDescription}</h1>
+                
+                
+                <h1>Price Per Night : ${e.PricePerNight}</h1>
+
+                <Link to={`/detail/${e._id}`}><button className="btn btn-success">Know More</button></Link>
+
+                
 
 
 
