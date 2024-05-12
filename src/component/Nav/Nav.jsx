@@ -81,7 +81,7 @@ const Nav = () => {
             </Link>
           </div>
           <div >
-            <Link to={"/register"}>
+            <Link to={"/reg"}>
               <button className="btn btn-outline ">Sign Up</button>
             </Link>
           </div>

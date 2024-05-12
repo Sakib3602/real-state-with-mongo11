@@ -1,6 +1,25 @@
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../AuthProvider";
 
 
 const MyBookings = () => {
+    const {person} = useContext(AuthContext)
+    const [data,setData] = useState([])
+
+    useEffect(()=>{
+        fetch(`http://localhost:4000/insertItemsAfterBookings?email=${person?.email}`)
+        .then(res => res.json())
+        .then(data => setData(data))
+    },[])
+    console.log(data)
+
+
+
+
+
+
+
     return (
         <div>
             <div className="container p-2 mx-auto sm:p-4 ">
@@ -19,7 +38,7 @@ const MyBookings = () => {
 				<tr className="text-left">
 					<th className="p-3">Email</th>
 					<th className="p-3">Price</th>
-					<th className="p-3">Price</th>
+					
 					<th className="p-3">From</th>
 					<th className="p-3">To</th>
 					<th className="p-3 text-right"></th>
@@ -27,18 +46,19 @@ const MyBookings = () => {
 				</tr>
 			</thead>
 			<tbody>
-				<tr className="border-b border-opacity-20 text-black text-xl">
+				{
+                    data.map(e => <tr key={e._id} className="border-b border-opacity-20 text-black text-xl">
 					<td className="p-3">
-						<p>97412378923</p>
+						<p>{e?.email}</p>
 					</td>
 					<td className="p-3">
-						<p>Microsoft Corporation</p>
+						<p>{e?.Price}</p>
 					</td>
 					<td className="p-3">
-                    <p>434/21/4345</p>
+                    <p>{e?.From}</p>
 					</td>
 					<td className="p-3">
-						<p>12/34/5666</p>
+						<p>{e?.To}</p>
 					</td>
 					<td className="p-3 text-right">
                     <span className="px-3 py-1 font-semibold rounded-md bg-violet-400 text-white">
@@ -51,7 +71,8 @@ const MyBookings = () => {
 						</span>
 					</td>
 				</tr>
-				
+				)
+                }
 				
 				
 			</tbody>
