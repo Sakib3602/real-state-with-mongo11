@@ -7,21 +7,23 @@ import Swal from "sweetalert2";
 const MyBookings = () => {
     const {person} = useContext(AuthContext)
     const [data,setData] = useState([])
+	
     // const [tableLoading,setTableLoading] = useState(false)
 
-    // function fetchData(){
-    //     // setTableLoading(true)
-       
-    //    }
-
-    useEffect(()=>{
-        
-       
+    function fetchData(){
+        // setTableLoading(true)
 		fetch(`http://localhost:4000/insertItemsAfterBookings?email=${person?.email}`)
         .then(res => res.json())
         .then(data => setData(data))
+       
+       }
+
+    useEffect(()=>{
+        
+		fetchData()
+		
     //    setTableLoading(false)
-    },[person?.email])
+    },[fetchData()])
 
     // console.log(tableLoading)
 
@@ -40,13 +42,15 @@ const MyBookings = () => {
 		  }).then(async(result) => {
 			if (result.isConfirmed) {
 				const get = await axios.delete(`http://localhost:4000/delete/${id}`)
+				
+				fetchData()
 				const {data} = await axios.patch( `http://localhost:4000/update/${RoomDescription}`,
 				{Availability}
 				)
 				
       
         console.log(get,data,"from here")
-		fetchData()
+		// fetchData()
 			  Swal.fire({
 				title: "Deleted!",
 				text: "Your file has been deleted.",
