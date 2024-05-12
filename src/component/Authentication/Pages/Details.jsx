@@ -19,6 +19,7 @@ const Details = () => {
   // console.log(startDate2)
   const forMakeAnother = {
     email : person?.email ,
+    RoomDescription : mainData?.RoomDescription ,
     From : startDate.toLocaleDateString(),
     To : startDate2.toLocaleDateString(),
     Price : mainData?.PricePerNight,
@@ -26,7 +27,7 @@ const Details = () => {
 
   }
 
-  // console.log(forMakeAnother,"sknci")
+  console.log(forMakeAnother,"sknci")
 
   useEffect(() => {
    
@@ -106,8 +107,9 @@ const Details = () => {
               Price Per NIght : ${mainData?.PricePerNight}
             </h1>
            
-            <button disabled={mainData?.Availability === false} onClick={()=> {updatePatch(mainData?._id,false);}} className="btn btn-sm btn-outline">Confirm</button>
-            <button disabled={mainData?.Availability === true}  onClick= {()=> updatePatch(mainData?._id,true)} className="btn btn-sm btn-outline">Cancel Booking</button>
+            <button disabled={mainData?.Availability === false} onClick={()=> {updatePatch(mainData?.RoomDescription,false);}} className="btn btn-sm btn-outline">Confirm</button>
+            
+           
           </div>
         </dialog>
         {/* modal */}
