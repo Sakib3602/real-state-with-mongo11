@@ -6,6 +6,7 @@ const Rooms = () => {
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(false);
 
+  const [sort,setSort] = useState('')
   useEffect(() => {
     getData();
   }, []);
@@ -13,7 +14,7 @@ const Rooms = () => {
   const getData = async () => {
     try {
       setLoad(true);
-      const data1 = await axios.get("http://localhost:4000/homeCard");
+      const data1 = await axios.get(`http://localhost:4000/homeCard?sort=${sort}`);
 
       setData(data1.data);
       console.log(data1.data)
@@ -23,6 +24,7 @@ const Rooms = () => {
       throw error;
     }
   };
+  console.log("sssssssssssssssssssss",sort)
   return (
     <div>
         <div className="px-4 py-16 mt-10 rounded-xl mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 dark:bg-gray-100 dark:text-gray-800">
@@ -91,6 +93,7 @@ const Rooms = () => {
           today!
         </p>
       </div>
+	  <button onClick={()=> setSort('des')} className="btn btn-sm lg:ml-[200px] mb-5">FILTER BY PRICE</button>
 </div>
 
       {load && <h1 className="text-[100px] text-black">LOading</h1>}
