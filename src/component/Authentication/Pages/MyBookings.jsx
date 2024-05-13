@@ -26,23 +26,19 @@ const MyBookings = () => {
   const { person } = useContext(AuthContext);
   const [data, setData] = useState([]);
 
-
-  // const [tableLoading,setTableLoading] = useState(false)
-
+  useEffect(() => {
+    fetchData();
+  }, [fetchData()]);
   function fetchData() {
-    // setTableLoading(true)
     fetch(
       `http://localhost:4000/insertItemsAfterBookings?email=${person?.email}`
     )
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        setData(data);
+      });
   }
-
-  useEffect(() => {
-    fetchData();
-
-    //    setTableLoading(false)
-  }, [fetchData()]);
+  // fetchData()  dependis
 
   // console.log(tableLoading)
 
@@ -99,6 +95,28 @@ const MyBookings = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [startDate2, setStartDate2] = useState(new Date());
 
+  const updateHandle = (e, RoomDescription) => {
+    e.preventDefault();
+
+    const updateData = {
+      From: startDate.toLocaleDateString(),
+      To: startDate2.toLocaleDateString(),
+    };
+    console.log(updateData, RoomDescription);
+
+    fetch(`http://localhost:4000/updateDate/${RoomDescription}`, {
+      method: "PUT", // specify the HTTP method
+      headers: {
+        "Content-Type": "application/json", // Specify the content type
+      },
+      body: JSON.stringify(updateData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("updated", data);
+      });
+  };
+
   return (
     <div>
       <div className="container p-2 mx-auto sm:p-4 ">
@@ -150,43 +168,60 @@ const MyBookings = () => {
                   </td>
                   <td className="p-3">
                     <div>
+                      {/* Open the modal using document.getElementById('ID').showModal() method */}
                       <button
-                        className="px-3 py-1 cursor-pointer font-semibold rounded-md bg-violet-400 text-white"
-                        onClick={openModal}
+                        className="btn px-3 py-1 cursor-pointer font-semibold rounded-md bg-violet-400 text-white"
+                        onClick={() =>
+                          document.getElementById("my_modal_5").showModal()
+                        }
                       >
                         Update
                       </button>
-                      <Modal
-                        isOpen={modalIsOpen}
-                        onAfterOpen={afterOpenModal}
-                        onRequestClose={closeModal}
-                        style={customStyles}
-                        contentLabel="Example Modal"
+                      <dialog
+                        id="my_modal_5"
+                        className="modal modal-bottom sm:modal-middle"
                       >
-                        <p>Change Your Date.</p>
+                        <div className="modal-box">
+                          <form
+                            onSubmit={(x) =>
+                              updateHandle(x, e?.RoomDescription)
+                            }
+                          >
+                            <div>
+                              <h1 className="text-[34px] mb-4">
+                                UpDate Your Date.
+                              </h1>
+                              <h1>From :</h1>
+                              <DatePicker
+                                className="border rounded-lg p-3"
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                              />
+                              <hr className="mt-3" />
+                              <h1>To :</h1>
+                              <DatePicker
+                                className="border rounded-lg p-3"
+                                selected={startDate2}
+                                onChange={(date) => setStartDate2(date)}
+                              />
+                              <hr className="mt-3" />
+                            </div>
+                            <input
+                              type="submit"
+                              className="btn btn-sm mt-2 px-3 py-1 cursor-pointer font-semibold rounded-md bg-violet-400 text-white"
+                            />
+                          </form>
+                          <div className="modal-action">
+                            <form method="dialog">
+                              {/* if there is a button in form, it will close the modal */}
 
-                        <form>
-                          <h1>Name</h1>
-                          <input
-                            type="text"
-                            className="border  text-black p-2 rounded-lg"
-                            value={e?.RoomDescription}
-                          />
-                          <h1>From :</h1>
-                          <DatePicker
-                            className="border p-3"
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date)}
-                          />
-                          <h1>To :</h1>
-                          <DatePicker
-                            className="border p-3"
-                            selected={startDate2}
-                            onChange={(date) => setStartDate2(date)}
-                          />
-                          <input type="submit" className="btn btn-sm" />
-                        </form>
-                      </Modal>
+                              <button className="btn px-3 py-1 cursor-pointer font-semibold rounded-md bg-red-400 text-white">
+                                Close
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      </dialog>
                     </div>
                   </td>
                   <td className="p-3 text-right">
@@ -215,27 +250,33 @@ const MyBookings = () => {
                           />
                           <h1>Your PhotoURL :</h1>
                           <input
+                            required
                             type="text"
-							name="photo"
+                            name="photo"
                             className="border  text-black p-2 rounded-lg"
-                            defaultValue={person?.photoURL || " " }
-							placeholder="Give URL"
+                            defaultValue={person?.photoURL || " "}
+                            placeholder="Give URL"
                           />
 
-						  <hr className="mt-2" />
+                          <hr className="mt-2" />
                           <h1>Rate</h1>
-                          <select name="cars" id="cars" className="border p-2 rounded" defaultValue={5}>
+                          <select
+                            name="cars"
+                            id="cars"
+                            className="border p-2 rounded"
+                            defaultValue={5}
+                          >
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
-                            
                           </select>
-						  <hr className="mt-2" />
+                          <hr className="mt-2" />
                           <h1>Your Experience</h1>
                           <input
                             type="text"
+                            required
                             placeholder="Share your words..."
                             className="input input-bordered input-lg w-full max-w-xs mb-2"
                           />
