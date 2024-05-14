@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate()
@@ -30,6 +31,12 @@ const Login = () => {
             // Signed in 
             const user = userCredential.user;
             console.log(user)
+            // navigate(location.state || '/')
+            const chotoUser = {email}
+            axios.post('http://localhost:4000/jwt', chotoUser)
+            .then(res => {
+              console.log(res.data)
+            })
             // ...
           })
           .catch((error) => {
@@ -46,6 +53,8 @@ const Login = () => {
     google()
     .then(()=>{
       toast.success('Log In Successful with Google.');
+      
+      
       navigate(location.state || '/')
     
       
@@ -55,7 +64,7 @@ const Login = () => {
     github()
     .then(()=>{
       toast.success('Log In Successful with GitHub.');
-    
+      navigate(location.state || '/')
       
     })
   }
@@ -132,6 +141,7 @@ const Login = () => {
         <button onClick={submitGitHub} className=" btn btn-wide rounded-md  btn-outline  text-xl">GitHub</button>
       </div>
     </div>
+    <p>Don't Have An Account? <Link to={'/reg'}>Register Now</Link></p>
     <div className="flex mt-6">
       <button className="px-8 py-2.5 w-full leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
         Log In

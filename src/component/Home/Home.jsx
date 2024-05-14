@@ -5,6 +5,7 @@ import HomeComp1 from "./HomeComp1";
 import HomeComp2 from "./HomeComp2";
 import HomeNews from "./HomeNews";
 import Marquee from "react-fast-marquee";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const [reviewData, setReviewData] = useState([]);
@@ -14,6 +15,10 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => setReviewData(data));
   }, []);
+
+  useEffect(()=>{
+    document.getElementById('my_modal_1').showModal()
+  },[])
   console.log(reviewData, "from home");
   return (
     <div>
@@ -27,6 +32,10 @@ const Home = () => {
       <HomeMap></HomeMap>
 
       <HomeNews></HomeNews>
+      <Helmet>
+          
+          <title>COZI- Home</title>
+        </Helmet>
 
       <Marquee>
       <div className=" flex m-5">
@@ -44,7 +53,7 @@ const Home = () => {
                 </div>
                 <div>
                   <h4 className="font-bold">{e.email}</h4>
-                  <span className="text-xs dark:text-gray-600">{i+1} days ago</span>
+                  <span className="text-xs dark:text-gray-600">Time : {e.time}</span>
                 </div>
               </div>
               <div className="flex items-center space-x-2 dark:text-yellow-700">
@@ -71,6 +80,26 @@ const Home = () => {
       </div>
 
       </Marquee>
+
+
+      {/*  */}
+
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+
+<dialog id="my_modal_1" className="modal">
+  <div className="modal-box bg-red-950 text-white">
+    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+    <p className="py-4 text-[34px]">60% Discount</p>
+    <p className=" text-[24px]">Explore Our Offers!</p>
+    <div className="modal-action">
+      <form method="dialog">
+        {/* if there is a button in form, it will close the modal */}
+        <button className="btn btn-sm">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+      {/*  */}
 
       
     </div>

@@ -4,9 +4,13 @@ import { AuthContext } from "../AuthProvider";
 
 
 const PrivateRoute = ({children}) => {
-    const {person} = useContext(AuthContext)
+    const {person , loading} = useContext(AuthContext)
     const location = useLocation()
 
+
+    if(loading) {
+        return <span className="loading loading-infinity m-auto loading-lg pt-32"></span>
+        }
     
   if (person) {
     return children;

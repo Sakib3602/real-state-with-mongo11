@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 const Rooms = () => {
@@ -52,6 +53,10 @@ const Rooms = () => {
             </svg>
             <span>Ea et neque distinctio</span>
           </li>
+          <Helmet>
+          
+          <title>COZI- All Rooms</title>
+        </Helmet>
           <li className="flex items-center space-x-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -2,10 +2,12 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
+  const navigate = useNavigate()
 
-    const {signWithEP} = useContext(AuthContext)
+    const {signWithEP , update ,logout} = useContext(AuthContext)
 
     const handleSubmit = (e)=>{
         e.preventDefault()
@@ -23,12 +25,24 @@ const Registration = () => {
         // email pass
         signWithEP(email,password)
         .then((result) => {
+         
+          update(name,photo)
+          .then()
+          .then(()=>{
+           
+            console.log("updated user")
+            navigate('/login')
+
+          })
             toast.success('Sigh Up Successful!')
             console.log(result)
         })
         .catch((error)=>{
             console.log(error.massage)
+            toast.success('Something is wrong!')
         })
+
+        logout()
 
     }
 
@@ -52,6 +66,7 @@ const Registration = () => {
         </label>
         <input
           id="username"
+          required
           type="text"
           name="name"
           className="block w-full px-4 py-2 mt-2  bg-white border  rounded-md text-black border-gray-200 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
@@ -72,6 +87,7 @@ const Registration = () => {
           id="emailAddress"
           type="email"
           name="email"
+          required
           className="block w-full px-4 py-2 mt-2 text-black border-gray-200 bg-white border  rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
         />
       </div>
@@ -96,13 +112,16 @@ const Registration = () => {
         <input
         name="password"
           type="password"
+          required
           className="block w-full px-4 py-2 mt-2  bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
         />
       </div>
     </div>
+    <p>All Ready Have An Account? <Link to={'/login'}>Log in.</Link></p>
     <div className="flex mt-6">
+      
       <button className="px-8 py-2.5 w-full leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-        Save
+        SUBMIT
       </button>
     </div>
   </form>

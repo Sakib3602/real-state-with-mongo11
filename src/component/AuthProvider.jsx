@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import {  createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import {  createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { auth } from "./Authentication/firebase.init";
 export const AuthContext = createContext(null)
 import { GoogleAuthProvider } from "firebase/auth";
@@ -11,24 +11,30 @@ const Githubprovider = new GithubAuthProvider();
 const provider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
 
+  const [loading,setLoading] = useState(true)
+
     const [person,setPerson] = useState(null)
     // sign up email pass
     const signWithEP = (email,password)=>{
-        return createUserWithEmailAndPassword(auth,email,password)
+      setLoading(true)
+        return createUserWithEmailAndPassword(auth, email, password)
     }
     // sign in email pass
     const signInEmailPassword = (email,password)=>{
+      setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     // logout
     function logout() {
+      setLoading(true)
         
         return signOut(auth);
       }
 
     //   github
     function github() {
+      setLoading(true)
         
         return signInWithPopup(auth, Githubprovider)
       }
@@ -36,7 +42,17 @@ const AuthProvider = ({ children }) => {
     //   google
 
     function google(){
+      setLoading(true)
         return signInWithPopup(auth, provider)
+    }
+
+    // update
+    function update(name, photo) {
+      // setLoading(true)
+      return updateProfile(auth.currentUser, {
+        displayName: name,
+        photoURL: photo,
+      });
     }
 
     // onAuth
@@ -47,7 +63,7 @@ const AuthProvider = ({ children }) => {
             setPerson(user);
             console.log("on auth", user);
           } 
-          
+          setLoading(false)
         });
     
         return () => {
@@ -62,6 +78,8 @@ const AuthProvider = ({ children }) => {
         google,
         person,
         github,
+        loading,
+        update,
        
       };
   

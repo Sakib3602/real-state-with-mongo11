@@ -9,6 +9,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import Modal from "react-modal";
 import toast, { Toaster } from "react-hot-toast";
+import moment from "moment";
+import { Helmet } from "react-helmet";
 
 const customStyles = {
   content: {
@@ -98,6 +100,7 @@ const MyBookings = () => {
 
   const [startDate, setStartDate] = useState(new Date());
   const [startDate2, setStartDate2] = useState(new Date());
+  const [mom, setMom] = useState(moment().format(" h:mm:ss a"));
 
   const updateHandle = (e, RoomDescription) => {
     e.preventDefault();
@@ -131,6 +134,7 @@ const MyBookings = () => {
     const photo = form.photo.value;
     const email = form.email.value;
     const words = form.words.value;
+    const time = mom;
     const hereRating = rating;
 
     const data = {
@@ -139,7 +143,9 @@ const MyBookings = () => {
       name,
       words,
       hereRating,
+      time,
     };
+    console.log(data);
 
     fetch("http://localhost:4000/reviewAll", {
       method: "POST",
@@ -184,6 +190,10 @@ const MyBookings = () => {
               </tr>
             </thead>
             <tbody>
+            <Helmet>
+          
+          <title>COZI- My Bookings</title>
+        </Helmet>
               {/* {
                     tableLoading && <h1>Loading..............</h1>
                 } */}
@@ -291,6 +301,7 @@ const MyBookings = () => {
                             type="text"
                             className="border  text-black p-2 rounded-lg"
                             name="email"
+                            value={person.displayName}
                           />
                           <h1>Your PhotoURL :</h1>
                           <input
@@ -298,7 +309,7 @@ const MyBookings = () => {
                             type="text"
                             name="photo"
                             className="border  text-black p-2 rounded-lg"
-                            defaultValue={person?.photoURL || " "}
+                            value={person?.photoURL}
                             placeholder="Give URL"
                           />
 
@@ -316,6 +327,7 @@ const MyBookings = () => {
                             <option value="4">4</option>
                             <option value="5">5</option>
                           </select>
+                          <h1>Time :{moment().format(" h:mm:ss a")}</h1>
                           <hr className="mt-2" />
                           <h1>Your Experience</h1>
                           <input

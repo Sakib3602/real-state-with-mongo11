@@ -11,7 +11,7 @@ const HomeMap = () => {
             <div className="w-[95%] md:w-[90%] mb-7 lg:w-[80%] m-auto text-center">
                 <p>Nestled amidst serene landscapes, our location offers a harmonious blend of natural beauty and modern amenities. Discover tranquility in every corner, with vibrant culture and attractions just moments away. Experience the essence of relaxation here.</p>
             </div>
-            <Map height={500} defaultCenter={[24.027377, 90.295849]} defaultZoom={13}>
+            <Map height={500} defaultCenter={[24.027377, 90.295849]} defaultZoom={12}>
       <Marker 
         width={50}
         anchor={[24.027377, 90.295849]} 
