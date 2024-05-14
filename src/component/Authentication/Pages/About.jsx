@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 
 
 const About = () => {
@@ -179,6 +180,10 @@ const About = () => {
 				</div>
 			</div>
 			<div className="space-y-4">
+            <Helmet>
+          
+          <title>COZI- About</title>
+        </Helmet>
 				<img alt="" className="object-cover h-56 mx-auto mb-4 bg-center rounded-sm dark:bg-gray-500" src="https://source.unsplash.com/240x320/?portrait?7" />
 				<div className="flex flex-col items-center">
 					<h4 className="text-xl font-semibold">Leroy Jenkins</h4>

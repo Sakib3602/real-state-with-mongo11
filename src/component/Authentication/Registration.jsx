@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Registration = () => {
   const navigate = useNavigate()
@@ -59,6 +60,10 @@ const Registration = () => {
     Register Now !
   </h2>
   <form onSubmit={handleSubmit}>
+  <Helmet>
+          
+          <title>COZI- Register now</title>
+        </Helmet>
     <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
       <div>
         <label className="text-black " htmlFor="username">

@@ -50,7 +50,7 @@ const Details = () => {
     )
       .then((res) => res.json())
       .then((data) => setReviewData(data));
-  }, []);
+  }, [nameOfTheData]);
 
   console.log(reviewData, "from detail");
 

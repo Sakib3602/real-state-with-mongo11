@@ -41,7 +41,7 @@ const Home = () => {
       <div className=" flex m-5">
 
         {
-            reviewData.map((e,i) => <div key={e._id} className="container p-4  flex flex-col w-full max-w-lg  mx-auto divide-y rounded-md dark:divide-gray-300 bg-gray-300 dark:text-gray-800">
+            reviewData.map((e) => <div key={e._id} className="container p-4  flex flex-col w-full max-w-lg  mx-auto divide-y rounded-md dark:divide-gray-300 bg-gray-300 dark:text-gray-800">
             <div className="flex justify-between p-4 ">
               <div className="flex space-x-4">
                 <div>

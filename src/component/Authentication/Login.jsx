@@ -3,6 +3,7 @@ import { AuthContext } from "../AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const navigate = useNavigate()
@@ -88,6 +89,10 @@ const Login = () => {
 
     return (
         <section className="max-w-4xl p-6 mx-auto text-black rounded-md shadow-md mt-20">
+           <Helmet>
+          
+          <title>COZI- Log in</title>
+        </Helmet>
   <h2 className="text-5xl text-center mb-5 text-black">
     Sigh In 
   </h2>
