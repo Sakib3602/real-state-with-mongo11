@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useId, useState } from "react";
 import { AuthContext } from "../../AuthProvider";
 import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
@@ -26,9 +26,13 @@ const MyBookings = () => {
   const { person } = useContext(AuthContext);
   const [data, setData] = useState([]);
 
+
+  const modalId = useId()
+
   useEffect(() => {
     fetchData();
-  }, [fetchData()]);
+  }, [fetchData]);
+
   function fetchData() {
     fetch(
       `http://localhost:4000/insertItemsAfterBookings?email=${person?.email}`
@@ -117,6 +121,36 @@ const MyBookings = () => {
       });
   };
 
+
+  // review send data to server
+  const [rating, setRating] = useState(5)
+  const reviewHandle = e => {
+    e.preventDefault()
+    const form = e.target;
+    const name = form.name.value
+    const photo = form.photo.value
+    const email = form.email.value
+    const words = form.words.value
+    const hereRating = rating
+
+    const data = {
+      photo,email,name,words,hereRating
+    }
+
+    fetch('http://localhost:4000/reviewAll',{
+      method: "POST",
+      headers : {
+        "content-type" : "application/json"
+      },
+      body : JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      alert("post done!")
+    })
+    console.log(data)
+  }
   return (
     <div>
       <div className="container p-2 mx-auto sm:p-4 ">
@@ -172,13 +206,13 @@ const MyBookings = () => {
                       <button
                         className="btn px-3 py-1 cursor-pointer font-semibold rounded-md bg-violet-400 text-white"
                         onClick={() =>
-                          document.getElementById("my_modal_5").showModal()
+                          document.getElementById(modalId).showModal()
                         }
                       >
                         Update
                       </button>
                       <dialog
-                        id="my_modal_5"
+                        id={modalId}
                         className="modal modal-bottom sm:modal-middle"
                       >
                         <div className="modal-box">
@@ -241,17 +275,20 @@ const MyBookings = () => {
                       >
                         <p className="text-[20px]">Review Us.</p>
 
-                        <form>
+                        <form onSubmit={reviewHandle}>
+                          <input type="text"name="name" value={e?.RoomDescription} />
                           <h1>Name</h1>
                           <input
                             type="text"
                             className="border  text-black p-2 rounded-lg"
                             value={e?.email}
+                            name="email"
                           />
                           <h1>Your PhotoURL :</h1>
                           <input
                             required
                             type="text"
+                            
                             name="photo"
                             className="border  text-black p-2 rounded-lg"
                             defaultValue={person?.photoURL || " "}
@@ -263,8 +300,9 @@ const MyBookings = () => {
                           <select
                             name="cars"
                             id="cars"
+                            onChange={(event) => setRating(event.target.value)}
                             className="border p-2 rounded"
-                            defaultValue={5}
+                            
                           >
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -276,6 +314,7 @@ const MyBookings = () => {
                           <h1>Your Experience</h1>
                           <input
                             type="text"
+                            name="words"
                             required
                             placeholder="Share your words..."
                             className="input input-bordered input-lg w-full max-w-xs mb-2"
