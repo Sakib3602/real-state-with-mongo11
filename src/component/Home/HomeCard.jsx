@@ -37,22 +37,33 @@ const HomeCard = () => {
 
                 {
                         load && <h1 className="text-[100px] text-black">LOading</h1>
+                        // bg-[#293624]
                     }
 
-            <div className="bg-[#293624]  lg:min-h-[1620px] p-2 md:p-[40px] lg:p-[60px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 text-white">
+            <div className="bg-[#293624] p-3 md:p-6 lg:p-44 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
                 
                 {/* card start */}
-               
-                {
-                    data.slice(0,6).map(e => <div key={e._id} className="h-[300px] w-[400px]">
-                    <img src={e.RoomImages} alt="" />
-                    <h1 className="mt-3 text-[25px]">{e.RoomDescription}</h1>
-                    <h1>Room Size : {e.RoomSize}</h1>
-                    <h1 className="text-[20px]">Price Per Night : {'$'+e.PricePerNight}</h1>
-                    <button className="btn">BOOK NOW</button>
+                
 
-                </div>)
+                {
+                    data.slice(0,6).map(e => <div key={e._id} className="card lg:card-side bg-black hover:bg-white text-white hover:text-black shadow-xl">
+                    <figure><img className="lg:h-[500px]" src={e.RoomImages} alt="Album"/></figure>
+                    <div className="card-body">
+                      <h2 className="card-title ">{e.RoomDescription}</h2>
+                      <p>Room Size : {e.RoomSize}</p>
+                      <button className="btn btn-sm hover:bg-black hover:text-white">Book Now</button>
+                      <button className="btn btn-sm hover:bg-black hover:text-white">Add To Dream List</button>
+                    </div>
+                  </div>)
                 }
+               
+                
+
+
+
+
+
+
                 {/* card end */}
 
             </div>
