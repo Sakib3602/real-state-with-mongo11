@@ -56,7 +56,7 @@ const HomeComp2 = () => {
 				</div>
 			</div>
 			<div aria-hidden="true" className="mt-10 lg:mt-0">
-				<img src="https://source.unsplash.com/random/360x480" alt="" className="mx-auto rounded-lg shadow-lg dark:bg-gray-500" />
+				<img src="https://images.unsplash.com/photo-1527694224012-be005121c774?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className="mx-auto rounded-lg shadow-lg dark:bg-gray-500" />
 			</div>
 		</div>
 		<div>

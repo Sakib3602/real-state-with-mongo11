@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="bg-[#36271F] mt-[500px] md:mt-0 lg:mt-0 h-[80vh] w-full">
+    <div className="bg-[#36271F] mt-[500px] md:mt-0 lg:mt-[120px] h-[80vh] w-full">
       <div className="w-full   text-[#947948] p-2 md:p-5 lg:p-[40px] space-y-10">
         <h1 className="text-[34px] md:text-[44px] lg:text-[54px] font-[700] text-center">
           --COZI--
@@ -19,6 +19,9 @@ const Footer = () => {
             </li>
             <li>
               <Link to={"/myBookings"}>My Bookings</Link>
+            </li>
+            <li>
+              <Link to={'/about'}>About Us</Link >
             </li>
           </ul>
         </div>

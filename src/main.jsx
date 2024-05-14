@@ -14,6 +14,7 @@ import Rooms from './component/Authentication/Pages/Rooms';
 import MyBookings from './component/Authentication/Pages/MyBookings';
 import Error from './component/Error';
 import Details from './component/Authentication/Pages/Details';
+import About from './component/Authentication/Pages/About';
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: '/myBookings',
         element: <MyBookings></MyBookings>,
+      },
+      {
+        path: '/about',
+        element: <About></About>,
       },
       {
         path: '/detail/:id',

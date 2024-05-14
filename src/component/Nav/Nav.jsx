@@ -47,6 +47,9 @@ const Nav = () => {
             <li>
               <Link to={'/myBookings'}>My Bookings</Link >
             </li>
+            <li>
+              <Link to={'/about'}>About Us</Link >
+            </li>
             </ul>
           </div>
          <Link to={'/'}> <a className=" text-5xl font-[600]">--COZI--</a></Link>
@@ -61,6 +64,9 @@ const Nav = () => {
             </li>
             <li>
               <Link to={'/myBookings'}>My Bookings</Link >
+            </li>
+            <li>
+              <Link to={'/about'}>About Us</Link >
             </li>
            
           </ul>

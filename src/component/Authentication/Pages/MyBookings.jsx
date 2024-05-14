@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // modal
 
 import Modal from "react-modal";
+import toast, { Toaster } from "react-hot-toast";
 
 const customStyles = {
   content: {
@@ -26,8 +27,7 @@ const MyBookings = () => {
   const { person } = useContext(AuthContext);
   const [data, setData] = useState([]);
 
-
-  const modalId = useId()
+  const modalId = useId();
 
   useEffect(() => {
     fetchData();
@@ -118,39 +118,43 @@ const MyBookings = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("updated", data);
+        toast.success("Update Successful!");
       });
   };
 
-
   // review send data to server
-  const [rating, setRating] = useState(5)
-  const reviewHandle = e => {
-    e.preventDefault()
+  const [rating, setRating] = useState(5);
+  const reviewHandle = (e) => {
+    e.preventDefault();
     const form = e.target;
-    const name = form.name.value
-    const photo = form.photo.value
-    const email = form.email.value
-    const words = form.words.value
-    const hereRating = rating
+    const name = form.name.value;
+    const photo = form.photo.value;
+    const email = form.email.value;
+    const words = form.words.value;
+    const hereRating = rating;
 
     const data = {
-      photo,email,name,words,hereRating
-    }
+      photo,
+      email,
+      name,
+      words,
+      hereRating,
+    };
 
-    fetch('http://localhost:4000/reviewAll',{
+    fetch("http://localhost:4000/reviewAll", {
       method: "POST",
-      headers : {
-        "content-type" : "application/json"
+      headers: {
+        "content-type": "application/json",
       },
-      body : JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      alert("post done!")
-    })
-    console.log(data)
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Thank You For Your Review!");
+      });
+    console.log(data);
+  };
   return (
     <div>
       <div className="container p-2 mx-auto sm:p-4 ">
@@ -192,7 +196,7 @@ const MyBookings = () => {
                     <p>{e?.RoomDescription}</p>
                   </td>
                   <td className="p-3">
-                    <p>{e?.Price}</p>
+                    <p>${e?.Price}</p>
                   </td>
                   <td className="p-3">
                     <p>{e?.From}</p>
@@ -266,6 +270,7 @@ const MyBookings = () => {
                       >
                         Review
                       </button>
+                      <Toaster position="top-center" reverseOrder={false} />
                       <Modal
                         isOpen={modalIsOpen}
                         onAfterOpen={afterOpenModal}
@@ -276,19 +281,21 @@ const MyBookings = () => {
                         <p className="text-[20px]">Review Us.</p>
 
                         <form onSubmit={reviewHandle}>
-                          <input type="text"name="name" value={e?.RoomDescription} />
+                          <input
+                            type="text"
+                            name="name"
+                            value={e?.RoomDescription}
+                          />
                           <h1>Name</h1>
                           <input
                             type="text"
                             className="border  text-black p-2 rounded-lg"
-                            
                             name="email"
                           />
                           <h1>Your PhotoURL :</h1>
                           <input
                             required
                             type="text"
-                            
                             name="photo"
                             className="border  text-black p-2 rounded-lg"
                             defaultValue={person?.photoURL || " "}
@@ -302,7 +309,6 @@ const MyBookings = () => {
                             id="cars"
                             onChange={(event) => setRating(event.target.value)}
                             className="border p-2 rounded"
-                            
                           >
                             <option value="1">1</option>
                             <option value="2">2</option>

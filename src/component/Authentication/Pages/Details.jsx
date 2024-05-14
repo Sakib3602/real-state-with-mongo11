@@ -15,6 +15,7 @@ const Details = () => {
   console.log(idParam.id);
   const [startDate, setStartDate] = useState(new Date());
   const [startDate2, setStartDate2] = useState(new Date());
+  const [reviewData, setReviewData] = useState('')
   // console.log(startDate)
   // console.log(startDate2)
   const forMakeAnother = {
@@ -39,11 +40,20 @@ const Details = () => {
         `http://localhost:4000/details/${idParam.id}`
       );
       setMainData(data1.data);
-      console.log(data1.data);
+      
     } catch (error) {
       // console.log(error.massage)
     }
   };
+
+  useEffect(()=>{
+    fetch(`http://localhost:4000/reviewSpecific?name=${mainData?.RoomDescription}`)
+	.then(res => res.json())
+	.then(data => setReviewData(data))
+  },[])
+
+  console.log(reviewData,"reviekfsncvidnvidnci")
+  console.log(mainData?.RoomDescription,"room data")
 
   const updatePatch = async(id,Availability)=>{
     const {data} = await axios.patch( `http://localhost:4000/update/${id}`,
