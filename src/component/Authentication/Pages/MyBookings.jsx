@@ -281,7 +281,7 @@ const MyBookings = () => {
                           <input
                             type="text"
                             className="border  text-black p-2 rounded-lg"
-                            value={e?.email}
+                            
                             name="email"
                           />
                           <h1>Your PhotoURL :</h1>
