@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 
 const HomeCard = () => {
@@ -51,7 +52,9 @@ const HomeCard = () => {
                     <div className="card-body">
                       <h2 className="card-title ">{e.RoomDescription}</h2>
                       <p>Room Size : {e.RoomSize}</p>
-                      <button className="btn btn-sm hover:bg-black hover:text-white">Book Now</button>
+                      <Link to={`/detail/${e._id}`}>
+                <button className="btn btn-sm btn-wide">Book Now</button>
+              </Link>
                       <button className="btn btn-sm hover:bg-black hover:text-white">Add To Dream List</button>
                     </div>
                   </div>)

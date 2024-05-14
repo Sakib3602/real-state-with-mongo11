@@ -15,6 +15,7 @@ import MyBookings from './component/Authentication/Pages/MyBookings';
 import Error from './component/Error';
 import Details from './component/Authentication/Pages/Details';
 import About from './component/Authentication/Pages/About';
+import PrivateRoute from './component/Authentication/PrivateRoute';
 
 
 const router = createBrowserRouter([
@@ -41,7 +42,10 @@ const router = createBrowserRouter([
       },
       {
         path: '/myBookings',
-        element: <MyBookings></MyBookings>,
+        element: <PrivateRoute>
+          <MyBookings></MyBookings>
+        </PrivateRoute>
+        ,
       },
       {
         path: '/about',

@@ -52,7 +52,7 @@ const Details = () => {
 	.then(data => setReviewData(data))
   },[])
 
-  console.log(reviewData,"reviekfsncvidnvidnci")
+  console.log(reviewData,"from detail")
   console.log(mainData?.RoomDescription,"room data")
 
   const updatePatch = async(id,Availability)=>{
