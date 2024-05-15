@@ -37,7 +37,7 @@ const MyBookings = () => {
 
   function fetchData() {
     fetch(
-      `http://localhost:4000/insertItemsAfterBookings?email=${person?.email}`
+      `https://assingment11-two.vercel.app/insertItemsAfterBookings?email=${person?.email}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -61,11 +61,13 @@ const MyBookings = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const get = await axios.delete(`http://localhost:4000/delete/${id}`);
+        const get = await axios.delete(
+          `https://assingment11-two.vercel.app/delete/${id}`
+        );
 
         fetchData();
         const { data } = await axios.patch(
-          `http://localhost:4000/update/${RoomDescription}`,
+          `https://assingment11-two.vercel.app/update/${RoomDescription}`,
           { Availability }
         );
 
@@ -111,7 +113,7 @@ const MyBookings = () => {
     };
     console.log(updateData, RoomDescription);
 
-    fetch(`http://localhost:4000/updateDate/${RoomDescription}`, {
+    fetch(`https://assingment11-two.vercel.app/updateDate/${RoomDescription}`, {
       method: "PUT", // specify the HTTP method
       headers: {
         "Content-Type": "application/json", // Specify the content type
@@ -147,7 +149,7 @@ const MyBookings = () => {
     };
     console.log(data);
 
-    fetch("http://localhost:4000/reviewAll", {
+    fetch("https://assingment11-two.vercel.app/reviewAll", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -190,10 +192,9 @@ const MyBookings = () => {
               </tr>
             </thead>
             <tbody>
-            <Helmet>
-          
-          <title>COZI- My Bookings</title>
-        </Helmet>
+              <Helmet>
+                <title>COZI- My Bookings</title>
+              </Helmet>
               {/* {
                     tableLoading && <h1>Loading..............</h1>
                 } */}

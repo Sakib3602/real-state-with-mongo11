@@ -34,7 +34,7 @@ const Login = () => {
             console.log(user)
             // navigate(location.state || '/')
             const chotoUser = {email}
-            axios.post('http://localhost:4000/jwt', chotoUser)
+            axios.post('https://assingment11-two.vercel.app/jwt', chotoUser)
             .then(res => {
               console.log(res.data)
             })

@@ -34,7 +34,8 @@ const Details = () => {
   const getdata = async () => {
     try {
       const data1 = await axios.get(
-        `http://localhost:4000/details/${idParam.id}`
+      
+        `https://assingment11-two.vercel.app/details/${idParam.id}`
       );
       setMainData(data1.data);
     } catch (error) {
@@ -46,7 +47,7 @@ const Details = () => {
   console.log(nameOfTheData,"skmcsdncinj")    // Luxury Penthouse with Private Pool
   useEffect(() => {
     fetch(
-      `http://localhost:4000/reviewSpecific?name=${nameOfTheData}`
+      `https://assingment11-two.vercel.app/reviewSpecific?name=${idParam.id}`
     )
       .then((res) => res.json())
       .then((data) => setReviewData(data));
@@ -56,11 +57,11 @@ const Details = () => {
 
 
   const updatePatch = async (id, Availability) => {
-    const { data } = await axios.patch(`http://localhost:4000/update/${id}`, {
+    const { data } = await axios.patch(`https://assingment11-two.vercel.app/update/${id}`, {
       Availability,
     });
     const insertValue = await axios.post(
-      "http://localhost:4000/insertItemsAfterBooking",
+      "https://assingment11-two.vercel.app/insertItemsAfterBooking",
       forMakeAnother
     );
     console.log(insertValue);

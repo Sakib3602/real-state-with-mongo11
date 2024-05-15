@@ -54,7 +54,7 @@ const router = createBrowserRouter([
       {
         path: '/detail/:id',
         element: <Details></Details>,
-        // loader : ({params})=> fetch(`http://localhost:4000/homeCard`)
+        // loader : ({params})=> fetch(`https://assingment11-two.vercel.app/homeCard`)
       },
     ]
   },

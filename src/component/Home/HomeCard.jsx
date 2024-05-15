@@ -14,7 +14,8 @@ const HomeCard = () => {
     const getData = async()=>{
         try {
             setLoad(true)
-            const data1 = await axios.get('http://localhost:4000/homeCard');
+            const data1 = await axios.get('https://assingment11-two.vercel.app/homeCard');
+            // https://assingment11-two.vercel.app
             
             setData(data1.data)
             setLoad(false)

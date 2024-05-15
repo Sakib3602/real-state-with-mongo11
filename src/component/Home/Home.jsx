@@ -11,7 +11,7 @@ const Home = () => {
   const [reviewData, setReviewData] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/reviewSpecific`)
+    fetch(`https://assingment11-two.vercel.app/reviewSpecific`)
       .then((res) => res.json())
       .then((data) => setReviewData(data));
   }, []);
@@ -32,11 +32,11 @@ const Home = () => {
       <HomeMap></HomeMap>
 
       <HomeNews></HomeNews>
+     
       <Helmet>
           
           <title>COZI- Home</title>
         </Helmet>
-
       <Marquee>
       <div className=" flex m-5">
 
